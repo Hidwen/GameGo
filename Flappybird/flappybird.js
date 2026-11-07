@@ -93,11 +93,19 @@ function update() {
             gameOver = true;
         }
     }
+    //clearpipes
+    while (pipeArray.length > 0 && pipeArray[0].x < -pipeWidth) {
+        pipeArray.shift(); //remove first element from pipe array
+    }
+
 
     //score
     context.fillStyle = "white";
     context.font = "45px sans-serif";
     context.fillText(score, 10, 50);
+    if (gameOver) {
+        context.fillText("Game Over", 5, 90);
+        }
 }
 
 function placePipes() {
@@ -130,6 +138,14 @@ function placePipes() {
 function moveBird(e) {
     if (e.code == "Space" || e.code == "ArrowUp") {
         velocityY = -6; //jump
+    }
+    //reset game
+    if (gameOver) {
+        bird.y = birdY;
+        pipeArray = [];
+        score = 0;
+        velocityY = 0;
+        gameOver = false;
     }
 } 
 function detectCollision(a,b) {
