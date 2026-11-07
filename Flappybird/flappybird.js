@@ -30,7 +30,7 @@ let velocityX = -2; //speed of pipes moving left
 let velocityY = 0; //jump speed of bird
 let gravity = 0.4; //speed of bird falling down
 let gameOver = false;
-
+let score = 0;
 
 window.onload = function () {
     board = document.getElementById("board");
@@ -75,15 +75,29 @@ function update() {
     bird.y = Math.max(bird.y + velocityY, 0); //bird should not go above the board
     context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 
+
+    if (bird.y > board.height) {
+        gameOver = true;
+    }
+
     //pipes
     for (let i = 0; i < pipeArray.length; i++) {
         let pipe = pipeArray[i];
         pipe.x += velocityX; //move pipe to left
         context.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height);
+        if (!pipe.passed && bird.x > pipe.x + pipe.width) {
+            score += 0.5
+            pipe.passed = true;
+        }
         if (detectCollision(bird, pipe)) {
             gameOver = true;
         }
     }
+
+    //score
+    context.fillStyle = "white";
+    context.font = "45px sans-serif";
+    context.fillText(score, 10, 50);
 }
 
 function placePipes() {
