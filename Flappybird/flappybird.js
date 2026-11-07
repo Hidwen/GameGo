@@ -63,7 +63,7 @@ window.onload = function () {
 
 function update() {
     requestAnimationFrame(update);
-    if(gameOver){
+    if (gameOver) {
         return;
     }   
     context.clearRect(0, 0, board.width, board.height);
@@ -87,7 +87,7 @@ function update() {
 }
 
 function placePipes() {
-    if(gameOver){
+    if (gameOver) {
         return;
     }
     let randomPipeY = pipeY - pipeHeight / 4 - Math.random() * (pipeHeight / 2);
@@ -118,7 +118,7 @@ function moveBird(e) {
         velocityY = -6; //jump
     }
 } 
-function detectCollision(bird, pipe) {
+function detectCollision(a,b) {
     return a.x < b.x + b.width &&
     a.x + a.width > b.x &&
     a.y < b.y + b.height &&
