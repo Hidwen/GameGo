@@ -126,7 +126,7 @@ function drawPlayButton(CenterY) {
     let btnY = CenterY - btnheight / 2;
 
 
-    If (Math.floor(score) > bestScore); {
+    if (Math.floor(score) > bestScore) {
         bestScore = Math.floor(score);
         localStorage.setItem("bestScore", bestScore);
     }
@@ -181,8 +181,8 @@ function drawScore() {
      context.lineWidth = 6;
      context.strokeStyle = "black";
      context.fillStyle = "white";
-     context.strokeText(score, boardWidth / 2, 100);
-     context.fillText(score, boardWidth / 2, 100);
+     context.strokeText(Math.floor(score), boardWidth / 2, 100);
+     context.fillText(Math.floor(score), boardWidth / 2, 100);
      context.textAlign = "left";
 
 }
