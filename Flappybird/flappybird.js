@@ -64,10 +64,19 @@ window.onload = function () {
     requestAnimationFrame(update);
     setInterval(placePipes, 1500); //every 1.5 seconds
     document.addEventListener("keydown", moveBird);
+    board.addEventListener("click", playerAction);
 }   
 
 function update() {
     requestAnimationFrame(update);
+    if (!gameStarted) {
+        context.clearRect(0, 0, board.width, board.height);
+        context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
+        context.drawImage(playImg, board.width / 2 - playSize / 2, board.height / 2 - playSize / 2, playSize, playSize);
+        return;
+    }
+
+    
     if (gameOver) {
         return;
     }   
@@ -114,6 +123,11 @@ function update() {
 }
 
 function placePipes() {
+
+    if (gameOver || !gameStarted) {
+        return;
+    }
+
     if (gameOver) {
         return;
     }
@@ -144,15 +158,26 @@ function moveBird(e) {
     if (e.code == "Space" || e.code == "ArrowUp") {
         velocityY = -6; //jump
     }
-    //reset game
-    if (gameOver) {
-        bird.y = birdY;
-        pipeArray = [];
-        score = 0;
-        velocityY = 0;
-        gameOver = false;
-    }
 } 
+
+function playerAction() {
+    if (!gameStarted) {
+        gameStarted = true;
+    } else if (gameOver) {
+        resetGame();
+        return;
+    }
+    velocityY = -6; //jump
+    }
+
+function resetGame() {
+    bird.y = birdY;
+    pipeArray = [];
+    score = 0;
+    velocityY = 0;
+    gameOver = false;
+}
+
 function detectCollision(a,b) {
     return a.x < b.x + b.width &&
     a.x + a.width > b.x &&
