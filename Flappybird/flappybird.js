@@ -31,12 +31,17 @@ let velocityY = 0; //jump speed of bird
 let gravity = 0.4; //speed of bird falling down
 let gameOver = false;
 let score = 0;
+let gameStarted = false;
+let playImg;
+let playSize = 80;
 
 window.onload = function () {
     board = document.getElementById("board");
     board.height = boardHeight;
     board.width = boardWidth;
     context = board.getContext("2d"); // used for drawing on the board
+    playImg = new Image();
+    playImg.src = "./play.png";
 
     //draw flappy bird structure
     //context.fillStyle = "Green";
