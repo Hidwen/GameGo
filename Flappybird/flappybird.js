@@ -32,16 +32,14 @@ let gravity = 0.4; //speed of bird falling down
 let gameOver = false;
 let score = 0;
 let gameStarted = false;
-let playImg;
-let playSize = 80;
+
 
 window.onload = function () {
     board = document.getElementById("board");
     board.height = boardHeight;
     board.width = boardWidth;
     context = board.getContext("2d"); // used for drawing on the board
-    playImg = new Image();
-    playImg.src = "./play.png";
+   document.fonts.load('45px "Creepster"');
 
     //draw flappy bird structure
     //context.fillStyle = "Green";
@@ -69,10 +67,10 @@ window.onload = function () {
 
 function update() {
     requestAnimationFrame(update);
-    if (!gameStarted) {
+        if (!gameStarted) {
         context.clearRect(0, 0, board.width, board.height);
         context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
-        context.drawImage(playImg, board.width / 2 - playSize / 2, board.height / 2 - playSize / 2, playSize, playSize);
+        drawPlayButton(boardHeight / 2);
         return;
     }
 
@@ -121,6 +119,46 @@ function update() {
         context.fillText("Game Over", 5, 90);
         }
 }
+
+function drawPlayButton(CenterY) {
+    let btnwidth = 170;
+    let btnheight = 70;
+    let btnX = boardWidth / 2 - btnwidth / 2;
+    let btnY = CenterY - btnheight / 2;
+
+    //green color button
+    context.beginPath();
+    context.roundRect(btnX, btnY, btnwidth, btnheight, 20);
+    context.fillStyle = "green";
+    context.fill();
+    context.lineWidth = 5;
+    context.strokeStyle = "#1b6e1b";
+    context.stroke();
+
+    //text outlines in button with the text too
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.font = "48px creepster, cursive";
+    context.lineWidth = 6;
+    context.strokeStyle = "black";
+    context.fillStyle = "orange";
+    context.strokeText("Play", boardWidth / 2, CenterY + 2);
+    context.fillText("Play", boardWidth / 2, CenterY + 2);
+    context.textAlign = "left";
+    context.textBaseline = "alphabetic";
+    
+}
+
+function drawGameOver() {
+//translucent layers
+context.fillStyle = "rgba(0, 0, 0, 0.5)";
+context.fillRect(0, 0, board.width, board.height);
+//text
+
+
+
+}
+
 
 function placePipes() {
 
