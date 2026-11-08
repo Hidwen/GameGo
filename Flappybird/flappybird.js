@@ -32,7 +32,7 @@ let gravity = 0.4; //speed of bird falling down
 let gameOver = false;
 let score = 0;
 let gameStarted = false;
-
+let bestScore = Number(localStorage.getItem("bestScore")) || 0;
 
 window.onload = function () {
     board = document.getElementById("board");
@@ -76,6 +76,7 @@ function update() {
 
     
     if (gameOver) {
+        drawGameOver();
         return;
     }   
     context.clearRect(0, 0, board.width, board.height);
@@ -112,9 +113,7 @@ function update() {
 
 
     //score
-    context.fillStyle = "white";
-    context.font = "45px sans-serif";
-    context.fillText(score, 10, 50);
+    drawScore();
     if (gameOver) {
         context.fillText("Game Over", 5, 90);
         }
@@ -125,6 +124,13 @@ function drawPlayButton(CenterY) {
     let btnheight = 70;
     let btnX = boardWidth / 2 - btnwidth / 2;
     let btnY = CenterY - btnheight / 2;
+
+
+    If (Math.floor(score) > bestScore); {
+        bestScore = Math.floor(score);
+        localStorage.setItem("bestScore", bestScore);
+    }
+
 
     //green color button
     context.beginPath();
@@ -154,11 +160,32 @@ function drawGameOver() {
 context.fillStyle = "rgba(0, 0, 0, 0.5)";
 context.fillRect(0, 0, board.width, board.height);
 //text
+context.fillStyle = "white";
+context.textAlign = "center";
+context.font = "45px sans-serif";
+context.fillText("Game Over", board.width / 2, 200);
+context.font = "30px sans-serif";
+context.fillText("Score: " + Math.floor(score), board.width / 2, 250);
+
+//Play Again icon
+drawPlayButton(370);
+context.textAlign = "left";
 
 
 
 }
 
+function drawScore() {
+     context.textAlign = "center";
+     context.font = "bold 60px sans-serif";
+     context.lineWidth = 6;
+     context.strokeStyle = "black";
+     context.fillStyle = "white";
+     context.strokeText(score, boardWidth / 2, 100);
+     context.fillText(score, boardWidth / 2, 100);
+     context.textAlign = "left";
+
+}
 
 function placePipes() {
 
