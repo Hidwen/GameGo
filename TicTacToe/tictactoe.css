@@ -4,6 +4,12 @@
   padding: 0;
 }
 
+:root {
+    --cell-size: 100px;
+    --mark-size: calc(var(--cell-size) * 0.9);
+}
+
+
 body {
     margin: 0;
 }
@@ -15,6 +21,7 @@ body {
     justify-content: center;
     align-content: center;
     grid-template-columns: repeat(3, auto);
+    align-items: center;
 }
 
 .cell {
@@ -22,5 +29,20 @@ body {
     height: 100px;
     background-color: black;
     border: 1px solid white;
-    
+
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}
+
+
+.cell:nth-child(3n + 1) {
+    border-left: none;
+}
+
+.cell:nth-child(3n + 3) {
+    border-right: none;
 }
