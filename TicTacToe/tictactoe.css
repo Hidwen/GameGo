@@ -61,9 +61,15 @@ body {
     pointer-events: none;
 }
 
+.board.x .cell:hover::before,
+.board.x .cell:hover::after{
+ background-color: lightgrey;
+}
 
 .cell.x::before,
-.cell.x::after {
+.cell.x::after,
+.board.x .cell:hover::before,
+.board.x .cell:hover::after {
     content: '';
     position: absolute;
     width: calc(var(--mark-size) * 0.15);
@@ -72,10 +78,12 @@ body {
 }
 
 
-.cell.x::before {
+.cell.x::before,
+.board.x .cell:hover::before {
     transform: rotate(45deg);
 }
-.cell.x::after {
+.cell.x::after,
+.board.x .cell:hover::after {
     transform: rotate(-45deg);
 }
 
