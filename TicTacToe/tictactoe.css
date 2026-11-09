@@ -61,10 +61,22 @@ body {
     pointer-events: none;
 }
 
+.cell.x::before,
+.cell.x::after,
+.cell.o::before {
+    background-color: black;
+
+}
+
+
+
 .board.x .cell:hover::before,
-.board.x .cell:hover::after{
+.board.x .cell:hover::after,
+.board.o .cell:hover::before{
  background-color: lightgrey;
 }
+
+
 
 .cell.x::before,
 .cell.x::after,
@@ -74,7 +86,6 @@ body {
     position: absolute;
     width: calc(var(--mark-size) * 0.15);
     height: var(--mark-size);
-    background-color: black;
 }
 
 
@@ -88,20 +99,23 @@ body {
 }
 
 .cell.o::before,
-.cell.o::after {
+.cell.o::after,
+.board.o .cell:hover::before,
+.board.o .cell:hover::after {
     content: '';
     border-radius: 50%;
     position: absolute;
-    width: var(--mark-size);
-    height: var(--mark-size);
-    background-color: black;
+    
 }
 
-.cell.o::before {
+.cell.o::before,
+.board.o .cell:hover::before {
     width: var(--mark-size);
     height: var(--mark-size);
+    
 }
-.cell.o::after {
+.cell.o::after,
+.board.o .cell:hover::after {
     width: calc(var(--mark-size) * 0.7);
     height: calc(var(--mark-size) * 0.7);
     background-color: white;
