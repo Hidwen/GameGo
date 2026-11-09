@@ -25,10 +25,12 @@ body {
 }
 
 .cell {
-    width: 100px;
-    height: 100px;
-    background-color: black;
-    border: 1px solid white;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 
@@ -45,4 +47,18 @@ body {
 
 .cell:nth-child(3n + 3) {
     border-right: none;
+}
+
+.cell:nth-child(9),
+.cell:nth-child(7),
+.cell:nth-child(8) {
+    border-bottom: none;
+}
+
+.cell.x::before,
+.cell.o::after {
+    content: '';
+    width: calc(var(--mark-size) * 0.15);
+    height: var(--mark-size);
+    background-color: black;
 }
