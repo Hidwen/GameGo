@@ -46,7 +46,7 @@ function endGame(draw) {
     } else {
         winningMessageTextElement.innerText = `${oturn ? "O's" : "X's"} Wins!`
     }
-    winningMessageTextElement.classList.add('show')
+    winningMessageElement.classList.add('show')
 }
 
 function placemark(cell, currentClass) {
