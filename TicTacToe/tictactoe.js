@@ -14,6 +14,8 @@ const win_combinations = [
 
 const cellElements = document.querySelectorAll('[data-cell]')
 const board = document.getElementById ('board')
+const winningMessageElement = document.getElementById('winningMessage')
+const winningMessageTextElement = document.querySelector('[data-winning-message-text]')
 let oturn
 
 startgame()
@@ -31,11 +33,20 @@ function handleClick(e) {
     const currentClass = oturn ? o_class : x_class
     placemark(cell, currentClass)
     if (checkwin(currentClass)) {
-        console.log('winner')
+        endGame(false)
     }
 
     swapturns()
     setBoardHoverClass()
+}
+
+function endGame(draw) {
+    if (draw) {
+
+    } else {
+        winningMessageTextElement.innerText = `${oturn ? "O's" : "X's"} Wins!`
+    }
+    winningMessageTextElement.classList.add('show')
 }
 
 function placemark(cell, currentClass) {
