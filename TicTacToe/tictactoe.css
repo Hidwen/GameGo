@@ -149,6 +149,7 @@ body {
 .winning-message {
     display: none;
     position: fixed;
+    z-index: 10;
     top : 0;
     left: 0;
     right: 0;
@@ -193,11 +194,15 @@ color: white;
 .score-box {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
     min-width: 80px;
     padding: 8px 14px;
-    border: 1px solid black;
+    border: none;
+    border-radius: 12px;
     background-color: white;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 
 .score-label {
@@ -211,10 +216,12 @@ color: white;
 }
 
 #resetScoreButton {
-    padding: 8px 14px;
+    padding: 10px 16px;
     font-size: 0.9rem;
     background-color: white;
-    border: 1px solid black;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
     cursor: pointer;
 }
 
