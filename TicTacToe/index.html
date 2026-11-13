@@ -9,6 +9,24 @@
     <script src="tictactoe.js" defer></script>
 </head>
 <body>
+
+    <div class="scoreboard">
+        <div class="score-box">
+            <span class="score-label">X Wins</span>
+            <span class="score-value" id="scoreX">0</span>
+        </div>
+        <div class="score-box">
+            <span class="score-label">Draws</span>
+            <span class="score-value" id="scoreDraw">0</span>
+        </div>
+        <div class="score-box">
+            <span class="score-label">O Wins</span>
+            <span class="score-value" id="scoreO">0</span>
+        </div>
+        <button id="resetScoreButton">Reset Scores</button>
+    </div>
+
+
     <div class="board o" id="board">
         <div class="cell" data-cell></div>
         <div class="cell" data-cell></div>
@@ -24,4 +42,5 @@
             <button id="restartButton">Restart</button>
         </div>
     </div>
+    
 </body>
