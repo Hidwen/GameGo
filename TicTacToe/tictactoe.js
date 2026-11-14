@@ -27,6 +27,11 @@ const scoreOElement = document.getElementById('scoreO')
 const scoreDrawElement = document.getElementById('scoreDraw')
 const resetScoreButton = document.getElementById('resetScoreButton')
 
+//Lines
+const winLine = document.getElementById('winLine')
+const winMessageDelay = 900 //so the line draw can finish properly
+let winMessageTimer
+
 startgame()
 
 restartButton.addEventListener('click', startgame)
@@ -35,6 +40,9 @@ resetScoreButton.addEventListener('click', resetScores)
 
 function startgame() {
    // oturn: false
+   clearTimeout(winMessageTimer)
+   board.classList.remove('game-over')
+   winLine.classList.remove('show', 'x-line', 'o-line')
     cellElements.forEach(cell => {
         cell.classList.remove(x_class)
         cell.classList.remove(o_class)
@@ -60,10 +68,15 @@ function handleClick(e) {
 }
 
 function endGame(draw) {
+    board.classList.add('game-over')
     if (draw) {
         winningMessageTextElement.innerText = 'Draw!'
         scores.draw++
+        updateScoreBoard()
+        winningMessageElement.classList.add('show')
+        return
     } else {
+        const winnerClass = oturn ? o_class : x_class
         winningMessageTextElement.innerText = `${oturn ? "O's" : "X's"} Wins!`
         if (oturn) {
             scores.o++
@@ -72,7 +85,13 @@ function endGame(draw) {
         }
     }
     updateScoreBoard()
-    winningMessageElement.classList.add('show')
+    drawWinLine(getWinningCombination(winnerClass), winnerClass)
+
+    //line popup display
+
+    winMessageTimer = setTimeout(() => {
+        winningMessageElement.classList.add('show')
+    }, winMessageDelay)
 }
 
 function isDraw() {

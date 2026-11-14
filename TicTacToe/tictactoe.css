@@ -33,6 +33,7 @@ body {
     align-content: center;
     grid-template-columns: repeat(3, auto);
     align-items: center;*/
+    position: relative;
     --board-padding: 24px;
     width: calc(var(--cell-size)*3 + var(--board-padding)*2);
     height: calc(var(--cell-size)*3 + var(--board-padding)*2);
@@ -229,3 +230,21 @@ color: white;
     background-color: black;
     color: white;
 }
+
+.win-line {
+    --line-thickness: 10px;
+    position: absolute;
+    left: var(--line-x);
+    top: var(--line-y);
+    margin-top: calc(var(--line-thickness)/-2);
+    height: var(--line-thickness);
+    width: 0;
+    border-radius: 999px;
+    opacity: 0;
+    transform-origin: 0 50%;
+    transform: rotate(var(--line-angle));
+    pointer-events: none;
+    z-index: 3;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.35)
+}
+
