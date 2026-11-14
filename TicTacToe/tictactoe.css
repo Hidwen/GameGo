@@ -151,18 +151,12 @@ body {
     display: none;
     position: fixed;
     z-index: 10;
-    top : 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.9);
+    inset: 0;
+    padding: 20px;
     justify-content: center;
     align-items: center;
-    color: white;
-    font-size: 5rem;
-    flex-direction: column;
+    background-color: rgba(0,0,0,0.9);
 }
-
 .winning-message button{
     font-size:  3rem;
     background-color: white;
@@ -179,6 +173,37 @@ color: white;
 
 .winning-message.show {
     display: flex;
+    animation: overlayFade 0.3s ease-out;
+}
+
+.winning-card {
+    --accent : gold;
+    max-width: 90vw;
+    padding: 32px 52px 40px;
+    text-align: center;
+    background-color: white;
+    border-top: 10px solid var(--accent);
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .45);
+    animation: cardPop 0.45s cubic-bezier(0.2, 1.3, 0.4, 1);
+}
+
+.winning-message[data-result="x"] .winning-card {--accent: red}
+.winning-message[data-result="o"] .winning-card {--accent: lime}
+
+.winning-kicker {
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 0.25rem;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+[data-winning-messagwe-text] {
+    margin: 8px 0 28px;
+    font-size: clamp(2.2rem, 8vw, 3.6rem);
+    font-weight: 800;
+    color: #1d2b53;
 }
 
 .scoreboard {

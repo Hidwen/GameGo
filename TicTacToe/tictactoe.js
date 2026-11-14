@@ -72,12 +72,14 @@ function endGame(draw) {
     const winnerClass = oturn ? o_class : x_class
     if (draw) {
         winningMessageTextElement.innerText = 'Draw!'
+        winningMessageElement.dataset.result = 'draw'
         scores.draw++
         updateScoreBoard()
         winningMessageElement.classList.add('show')
         return
     } else {
         winningMessageTextElement.innerText = `${oturn ? "O's" : "X's"} Wins!`
+        winningMessageElement.dataset.result = winnerClass
         if (oturn) {
             scores.o++
         } else {
