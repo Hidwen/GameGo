@@ -39,7 +39,7 @@ resetScoreButton.addEventListener('click', resetScores)
 
 
 function startgame() {
-   // oturn: false
+   oturn =  false
    clearTimeout(winMessageTimer)
    board.classList.remove('game-over')
    winLine.classList.remove('show', 'x-line', 'o-line')
@@ -69,6 +69,7 @@ function handleClick(e) {
 
 function endGame(draw) {
     board.classList.add('game-over')
+    const winnerClass = oturn ? o_class : x_class
     if (draw) {
         winningMessageTextElement.innerText = 'Draw!'
         scores.draw++
@@ -76,7 +77,6 @@ function endGame(draw) {
         winningMessageElement.classList.add('show')
         return
     } else {
-        const winnerClass = oturn ? o_class : x_class
         winningMessageTextElement.innerText = `${oturn ? "O's" : "X's"} Wins!`
         if (oturn) {
             scores.o++
@@ -149,13 +149,30 @@ function getWinningCombination(currentClass) {
 }
 
 function drawWinLine(combination, currentClass) {
-    const boardBox = board.getBoundingClientRect()
     const firstBox = cellElements[combination[0]].getBoundingClientRect()
     const lastBox = cellElements[combination[2]].getBoundingClientRect()
 
 
-    const startX = firstBox.left + firstBox.width / 2 -boardBox.left
-    const startY = firstBox.top + firstBox.height/2 - boardBox.top
-    const endX = lastBox.left + lastBox.width/2 - boardBox.left
-    const endY = lastBox.top + lastBox.height/2 - boardBox.top
+    const startX = firstBox.left + firstBox.width / 2 
+    const startY = firstBox.top + firstBox.height/2 
+    const endX = lastBox.left + lastBox.width/2 
+    const endY = lastBox.top + lastBox.height/2 
+
+    const dx = endX - startX
+    const dy = endY - startY
+    const distance = Math.hypot(dx, dy)
+    const angle = Math.atan2(dy, dx) * 180 / Math.PI
+
+    const extra = 22
+    const lineStartX = startX - (dx/distance) * extra
+    const lineStartY = startY - (dy/distance) * extra
+
+    winLine.style.setProperty('--line-x', `${lineStartX}px`)
+    winLine.style.setProperty('--line-y', `${lineStartY}px`)
+    winLine.style.setProperty('--line-length', `${distance + extra *2}px`)
+    winLine.style.setProperty('--line-angle', `${angle}deg`)
+
+    winLine.classList.add(currentClass + '-line')
+    void winLine.offsetWidth
+    winLine.classList.add('show')
 }

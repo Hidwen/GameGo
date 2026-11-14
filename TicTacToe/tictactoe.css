@@ -248,3 +248,17 @@ color: white;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.35)
 }
 
+.win-line.x-line {
+    background-color: red;
+}
+.win-line.o-line {
+    background-color: lime;
+}
+.win-line.show {
+    width: var(--line-length);
+    opacity: 1;
+    transition: width 0.6s ease-out, opacity 0.2s ease-out;
+}
+.board.game-over .cell {
+    pointer-events: none;
+}
