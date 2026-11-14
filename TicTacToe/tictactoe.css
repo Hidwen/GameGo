@@ -155,21 +155,10 @@ body {
     padding: 20px;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0,0,0,0.9);
-}
-.winning-message button{
-    font-size:  3rem;
-    background-color: white;
-    border: 1px solid black;
-    padding: .3em .6em;
-    cursor: pointer;
+    background-color: rgba(126, 192, 222, 0.9);
+    
 }
 
-.winning-message button:hover {
-background-color: black;
-border-color: white;
-color: white;
-}
 
 .winning-message.show {
     display: flex;
@@ -178,6 +167,10 @@ color: white;
 
 .winning-card {
     --accent : gold;
+    display: flex;             
+    flex-direction: column;    
+    align-items: center;      
+    gap: 28px;                 
     max-width: 90vw;
     padding: 32px 52px 40px;
     text-align: center;
@@ -191,19 +184,15 @@ color: white;
 .winning-message[data-result="x"] .winning-card {--accent: red}
 .winning-message[data-result="o"] .winning-card {--accent: lime}
 
-.winning-kicker {
-    font-size: 0.85rem;
-    font-weight: bold;
-    letter-spacing: 0.25rem;
-    text-transform: uppercase;
-    color: var(--accent);
-}
 
-[data-winning-messagwe-text] {
-    margin: 8px 0 28px;
-    font-size: clamp(2.2rem, 8vw, 3.6rem);
+
+.winning-card .winning-text {
+    margin: 0;
+    font-size: 3.6rem;
     font-weight: 800;
-    color: #1d2b53;
+    line-height: 1.1;
+    text-align: center;
+    color: var(--accent);
 }
 
 .scoreboard {
@@ -215,6 +204,43 @@ color: white;
     align-items: center;
     gap: 12px;
     z-index: 5;
+}
+
+#restartButton {
+    margin: 0;                  
+    padding: 0.7em 1.8em;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: white;
+    background-color: #fbf72c;
+    border: none;
+    border-color: var(--accent);
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(80, 67, 196, 0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+#restartButton:hover {
+    background-color: var(--accent);
+    color: #4563b6;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(29, 43, 83, 0.45);
+
+}
+
+#restartButton:active {
+    transform: translateY(0);
+}
+
+@keyframes overlayFade {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes cardPop {
+    from {opacity: 0; transform: scale(0.8) translateY(20px);}
+    to {opacity: 1; transform: scale(1) translateY(0);}
 }
 
 .score-box {
@@ -258,7 +284,7 @@ color: white;
 
 .win-line {
     --line-thickness: 10px;
-    position: absolute;
+    position: fixed;            
     left: var(--line-x);
     top: var(--line-y);
     margin-top: calc(var(--line-thickness)/-2);
