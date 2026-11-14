@@ -139,3 +139,23 @@ function resetScores() {
     scores.draw = 0
     updateScoreBoard()
 }
+
+function getWinningCombination(currentClass) {
+    return win_combinations.find(combination => {
+        return combination.every(index => {
+            return cellElements[index].classList.contains(currentClass)
+        })
+    })
+}
+
+function drawWinLine(combination, currentClass) {
+    const boardBox = board.getBoundingClientRect()
+    const firstBox = cellElements[combination[0]].getBoundingClientRect()
+    const lastBox = cellElements[combination[2]].getBoundingClientRect()
+
+
+    const startX = firstBox.left + firstBox.width / 2 -boardBox.left
+    const startY = firstBox.top + firstBox.height/2 - boardBox.top
+    const endX = lastBox.left + lastBox.width/2 - boardBox.left
+    const endY = lastBox.top + lastBox.height/2 - boardBox.top
+}
